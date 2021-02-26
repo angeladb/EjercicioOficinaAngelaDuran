@@ -27,11 +27,13 @@ public class Principal {
 		Sobremesa[] arraySobremesa = new Sobremesa[7];
 		int sobremesaActivos = 2;
 
-		arraySobremesa[0] = new Sobremesa(contadorSerie, "HP", "Spadrille", 28, null, false, false, false, "sobremesa", 500, 8, "HP", "HP", "HP");
+		arraySobremesa[0] = new Sobremesa(contadorSerie, "HP", "Spadrille", 28, null, false, false, false, "sobremesa",
+				500, 8, "HP", "HP", "HP");
 		contadorSerie++;
-		arraySobremesa[1] = new Sobremesa(contadorSerie, "HP", "Centipede", 20, null, false, false, false, "sobremesa", 500, 16, "Microsoft", "Microsoft", "HP");
+		arraySobremesa[1] = new Sobremesa(contadorSerie, "HP", "Centipede", 20, null, false, false, false, "sobremesa",
+				500, 16, "Microsoft", "Microsoft", "HP");
 		contadorSerie++;
-		
+
 		for (int i = 2; i < arraySobremesa.length; contadorSerie++, i++) {
 			arraySobremesa[i] = new Sobremesa();
 			arraySobremesa[i].setNumeroSerie(contadorSerie);
@@ -44,13 +46,15 @@ public class Principal {
 		// CREAMOS LOS PORTATILES POR DEFECTO ANTES DE INICIAR PROGRAMA
 		Portatil[] arrayPortatil = new Portatil[7];
 		int portatilActivos = 3;
-		arrayPortatil[0] = new Portatil(1111, "MSI", "Dragoncin", 14, null, false, false, false, "portatil", true, false, 16);
+		arrayPortatil[0] = new Portatil(1111, "MSI", "Dragoncin", 14, null, false, false, false, "portatil", true,
+				false, 16);
 		contadorSerie++;
-		arrayPortatil[1] = new Portatil(2222, "HP", "Mola", 15, null, false, false, false, "portatil",  true, false, 8);
+		arrayPortatil[1] = new Portatil(2222, "HP", "Mola", 15, null, false, false, false, "portatil", true, false, 8);
 		contadorSerie++;
-		arrayPortatil[2] = new Portatil(3333, "Microsoft Surface", "Ventanita", 17, null, false, false, false, "portatil",  true, false, 8);
+		arrayPortatil[2] = new Portatil(3333, "Microsoft Surface", "Ventanita", 17, null, false, false, false,
+				"portatil", true, false, 8);
 		contadorSerie++;
-		
+
 		for (int i = 3; i < arrayPortatil.length; contadorSerie++, i++) {
 			arrayPortatil[i] = new Portatil();
 			arrayPortatil[i].setNumeroSerie(contadorSerie);
@@ -99,52 +103,89 @@ public class Principal {
 			arrayDispositivo[contadorDisp] = arraySobremesa[i];
 			contadorDisp++;
 		}
-
-		boolean retrocederMenu = false;
-		int eleccion = 0;
+		boolean retrocederMenuPrincipal = false;
+		boolean retrocederMenuEmpleados = false;
 		Scanner sc = new Scanner(System.in);
 		Scanner scInt = new Scanner(System.in);
-		while (!retrocederMenu) {
-			System.out.println("\n¿Qué operación desea realizar? Introduzca un número del 1 al 4\n"
-					+ "1.Introducir empleado(dar de alta)\n" + "2.Dar de baja a un empleado\n"
-					+ "3.Modificar datos empleado\n" + "4.Mostrar listado de todos los empleados)" + "\n5.Salir"
-					+ "\n6.Crear Nuevo dispositivo.");
-			eleccion = sc.nextInt();
-			switch (eleccion) {
+
+		// MENU PRINCIPAL
+		int seleccionMenuPrincipal = 0;
+		while (retrocederMenuPrincipal = false) {
+			System.out.println(
+					"****MENU PRINCIPAL****\nSeleccione un menú (1-3)\n1.Empleados.\n2.Dispositivos\n3.Asignar dispositivo a empleado\n4.Enviar a reparar un dispositivo.\n5.Salir\n");
+			seleccionMenuPrincipal = sc.nextInt();
+			
+			switch (seleccionMenuPrincipal) {
+
+			// MENU DE EMPLEADOS
 			case 1:
-				if (empleadosActivos < arrayEmpleados.length) {
-					Empleado.IntroducirEmpleado(arrayEmpleados, empleadosActivos);
-					empleadosActivos++;
-				} else {
-					System.out.println("No se pueden introducir nuevos empleados. La oficina está completa");
+				int eleccion = 0;
+				while (retrocederMenuEmpleados==false) {
+					System.out
+							.println("MENU EMPLEADOS\n¿Qué operación desea realizar? Introduzca un número del 1 al 4\n"
+									+ "1.Introducir empleado(dar de alta)\n" + "2.Dar de baja a un empleado\n"
+									+ "3.Modificar datos empleado\n" + "4.Mostrar listado de todos los empleados)"
+									+ "\n5.Salir");
+					eleccion = sc.nextInt();
+					switch (eleccion) {
+
+					// INTRODUCIR EMPLEADO
+					case 1:
+
+						if (empleadosActivos < arrayEmpleados.length) {
+							Empleado.IntroducirEmpleado(arrayEmpleados, empleadosActivos);
+							empleadosActivos++;
+						} else {
+							System.out.println("No se pueden introducir nuevos empleados. La oficina está completa");
+						}
+						break;
+
+					// ELIMINAR EMPLEADO
+					case 2:
+						System.out.println("¿Qué empleado quiere eliminar?:");
+						int selectEmpleado = scInt.nextInt() - 1;
+						Empleado.BorrarEmpleado(arrayEmpleados, empleadosActivos, selectEmpleado);
+						if (arrayEmpleados[selectEmpleado].getHuecoLibre()) {
+							System.out.println("Empleado eliminado*****");
+							empleadosActivos--;
+						}
+						break;
+
+					// MODIFICAR EMPLEADO
+					case 3:
+						Empleado.ModificarEmpleado(arrayEmpleados, empleadosActivos);
+						break;
+
+					// LISTAR EMPLEADO
+					case 4:
+						Empleado.ListarEmpleado(arrayEmpleados, empleadosActivos);
+						break;
+
+					// SALIR DE MENU EMPLEADOS Y VOLVER A MENU PRINCIPAL
+					case 5:
+						System.out.println("***************\nMENU EMPLEADOS CERRADO. MENU PRINCIPAL\n***************");
+						retrocederMenuEmpleados = true;
+						break;
+
+						// DEFAULT
+					default:
+						System.out.println("\n***************\n***************");
+
+					}
 				}
-				break;
-			case 2:
-				System.out.println("¿Qué empleado quiere eliminar?:");
-				int selectEmpleado = scInt.nextInt() - 1;
-				Empleado.BorrarEmpleado(arrayEmpleados, empleadosActivos, selectEmpleado);
-				if (arrayEmpleados[selectEmpleado].getHuecoLibre()) {
-					System.out.println("Empleado eliminado*****");
-					empleadosActivos--;
-				}
-				break;
-			case 3:
-				Empleado.ModificarEmpleado(arrayEmpleados, empleadosActivos);
-				break;
-			case 4:
-				Empleado.ListarEmpleado(arrayEmpleados, empleadosActivos);
-				break;
+				break; // fIN DEL MENU EMPLEADOS
+
 			case 5:
-				System.out.println("***************\nGracias por venir\n***************");
-				return;
-			case 6:
-				Dispositivo.IntroducirDispositivo(arrayPortatil, arrayMovil, arraySobremesa, arrayEmpleados,
-						arrayDispositivo);
+				System.out.println("VOLVER AL MENU PRINCIPAL");
+				retrocederMenuPrincipal = true;
+				break;
+				
+				
 			default:
-				System.out.println("\n***************\nMENU PRINCIPAL***************");
+				System.out.println("nasoldnfkafñsfñlamsffeshiñ");
+				return;
 
 			}
-
 		}
 	}
 }

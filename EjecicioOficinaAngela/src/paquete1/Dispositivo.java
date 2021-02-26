@@ -150,8 +150,6 @@ public class Dispositivo {
 			if (selectDispositivo.getAsignado() == false && selectDispositivo.enReparacion == false) {
 				System.out.println("Dispositivo" + selectDispositivo.getNumeroSerie() + "*************************");
 
-				Empleado.seleccionarEmpleadoAsignar(arrayEmpleados, selectDispositivo);
-
 				System.out.println(
 						"Qué tipo de dispositivo es? \n1. Portatil 2. Sobremesa 3. Movil\nIntroduzca un numero");
 
@@ -189,10 +187,9 @@ public class Dispositivo {
 		System.out.println("Introduzca las pulgadas (14, 15, 20...):");
 		selectDispositivo.setPulgadasPantalla(scInt.nextInt());
 		selectDispositivo.setEnReparacion(false);
-		selectDispositivo.setAsignado(true);
+		selectDispositivo.setAsignado(false);
 		System.out.println("Dispositivo " + selectDispositivo.marca + " " + selectDispositivo.modelo
-				+ " creado y asignado a " + selectDispositivo.quienLoTiene.getNombreEmpleado());
-
+				+ " creado. ");
 	}
 
 	public void modificarDipsositivo(Dispositivo[] arrayDispositivo) {

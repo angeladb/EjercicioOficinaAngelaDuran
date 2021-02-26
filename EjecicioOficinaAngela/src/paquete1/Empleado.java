@@ -250,7 +250,15 @@ public class Empleado {
 		selectDispositivo.setquienLoTiene(selectEmpleado);
 		selectDispositivo.setAsignado(true);
 		System.out.println("Creando dispositivo para " + selectEmpleado.getNombreEmpleado());
-
+		if (selectDispositivo.getTipoDispositivo()=="portatil") {
+			selectEmpleado.portatilesAsignados++;
+		}
+		if (selectDispositivo.getTipoDispositivo()=="sobremesa") {
+			selectEmpleado.sobremesasAsignados++;
+		}
+		if (selectDispositivo.getTipoDispositivo()=="movil") {
+			selectEmpleado.movilesAsignados++;
+		}
 		// TODO array de dispositivos
 
 	}
