@@ -103,24 +103,26 @@ public class Principal {
 			arrayDispositivo[contadorDisp] = arraySobremesa[i];
 			contadorDisp++;
 		}
-		boolean retrocederMenuPrincipal = false;
-		boolean retrocederMenuEmpleados = false;
+
 		Scanner sc = new Scanner(System.in);
 		Scanner scInt = new Scanner(System.in);
 
 		// MENU PRINCIPAL
 		int seleccionMenuPrincipal = 0;
-		while (retrocederMenuPrincipal = false) {
+		boolean retrocederMenuPrincipal = false;
+		while (retrocederMenuPrincipal == false) {
 			System.out.println(
-					"****MENU PRINCIPAL****\nSeleccione un menú (1-3)\n1.Empleados.\n2.Dispositivos\n3.Asignar dispositivo a empleado\n4.Enviar a reparar un dispositivo.\n5.Salir\n");
+					"****MENU PRINCIPAL****\nSeleccione un menú (1-3)\n1.Empleados.\n2.Dispositivos"
+					+ "\n3.Asignar dispositivo a empleado\n4.Enviar a reparar un dispositivo.\n5.Salir\n");
 			seleccionMenuPrincipal = sc.nextInt();
-			
+
 			switch (seleccionMenuPrincipal) {
 
 			// MENU DE EMPLEADOS
 			case 1:
 				int eleccion = 0;
-				while (retrocederMenuEmpleados==false) {
+				boolean retrocederMenu = false;
+				while (retrocederMenu == false) {
 					System.out
 							.println("MENU EMPLEADOS\n¿Qué operación desea realizar? Introduzca un número del 1 al 4\n"
 									+ "1.Introducir empleado(dar de alta)\n" + "2.Dar de baja a un empleado\n"
@@ -164,10 +166,10 @@ public class Principal {
 					// SALIR DE MENU EMPLEADOS Y VOLVER A MENU PRINCIPAL
 					case 5:
 						System.out.println("***************\nMENU EMPLEADOS CERRADO. MENU PRINCIPAL\n***************");
-						retrocederMenuEmpleados = true;
+						retrocederMenu = true;
 						break;
 
-						// DEFAULT
+					// DEFAULT
 					default:
 						System.out.println("\n***************\n***************");
 
@@ -175,14 +177,72 @@ public class Principal {
 				}
 				break; // fIN DEL MENU EMPLEADOS
 
-			case 5:
-				System.out.println("VOLVER AL MENU PRINCIPAL");
-				retrocederMenuPrincipal = true;
+			// MENU DISPOSITIVOS
+
+			case 2:
+				eleccion = 0;
+				retrocederMenu = false;
+				while (retrocederMenu == false) {
+					System.out.println(
+							"MENU DISPOSITIVOS\n¿Qué operación desea realizar? Introduzca un número del 1 al 4\n"
+									+ "1.Introducir dispositivo(dar de alta)\n" + "2.Modificar dispositivo\n"
+									+ "3.Mostrar dispositivos creados\n" + "4.Salir del menú)");
+					eleccion = sc.nextInt();
+					switch (eleccion) {
+
+					// INTRODUCIR NUEVO DISPOSITIVO
+					case 1:
+						Dispositivo.IntroducirDispositivo(arrayPortatil, arrayMovil, arraySobremesa, arrayEmpleados,
+								arrayDispositivo);
+						break;
+
+					// MODIFICAR DISPOSITIVO
+					case 2:
+						Dispositivo.modificarDipsositivo(arrayDispositivo);
+						break;
+
+					//TODO MOSTRAR LISTA DE DISPOSITIVOS
+					case 3:
+						break;
+
+					// SALIR DE MENU DISPOSITIVOS Y VOLVER A MENU PRINCIPAL
+					case 4:
+						System.out.println("***************\nMENU DISPOSITIVOS CERRADO. MENU PRINCIPAL\n***************");
+						retrocederMenu = true;
+						break;
+
+					// DEFAULT
+					default:
+						System.out.println("\n***************\n***************");
+
+					}
+				}
 				break;
 				
+				//ASIGNAR DISPOSITIVO A EMPLEADO
+				/*
+				 * CASE 3
+				 *  1. RECORRER ARRAY DISPOSITIVOS
+				 * 2. SELECCIONAR CON SCANNER QUE DISPOSITIVO ASIGNAR
+				 * 3. SI YA ESTÁ ASIGNADO: MOSTRAR QUIEN LO TIENE Y SI LO QUEREMOS CAMBIAR 
+				 * SI NO ESTA ASIGNADO CONTINUAR
+				 * 4. MOSTRAR TODOS LOS EMPLEADOS A LOS QUE SE PUEDE ASIGNAR ESE TIPO DE DISPOSITIVOS PORQUE NO TIENE YA UNO
+				 * 5. SETEAR EN ESE DISPOSITIVO QUIEN SE LO QUEDA
+				 */
 				
+				
+				//MANDAR DISPOSITIVO A REPARAR
+				/*1. RECORRER DISPOSITIVOS NO EN REPARACION
+				 * 2. SELECCIONARLO
+				 * 3. DESASIGNARLO DE EMPLEADO (SETEAR NULL QUE EMPLEADO LO TIENE)
+				 */
+			case 5:
+				System.out.println("FIN DEL PROGRAMA");
+				retrocederMenuPrincipal = true;
+				break;
+
 			default:
-				System.out.println("nasoldnfkafñsfñlamsffeshiñ");
+				System.out.println("miau");
 				return;
 
 			}

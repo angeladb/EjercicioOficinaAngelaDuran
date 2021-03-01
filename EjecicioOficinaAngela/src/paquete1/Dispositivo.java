@@ -192,7 +192,7 @@ public class Dispositivo {
 				+ " creado. ");
 	}
 
-	public void modificarDipsositivo(Dispositivo[] arrayDispositivo) {
+	public static void modificarDipsositivo(Dispositivo[] arrayDispositivo) {
 		System.out.println("¿Qué dispositivo quiere modificar? Introduzca su posicion en la siguiente lista:");
 		for (int i = 0; i < arrayDispositivo.length; i++) {
 			if (arrayDispositivo[i].getEspacioLibre() == false) {
