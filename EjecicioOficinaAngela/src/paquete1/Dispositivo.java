@@ -39,6 +39,11 @@ public class Dispositivo {
 		return "Dispositivo " + numeroSerie + "[Marca=" + marca + ", modelo=" + modelo + ", asignado a=" + quienLoTiene
 				+ "]";
 	}
+	
+	public String imprimeDispositivo() {
+		return "Dispositivo " + tipoDispositivo + " " + marca + " de " + quienlotiene.getNombre; 
+	}
+	
 	// getters y setters
 
 	public int getNumeroSerie() {
@@ -188,8 +193,7 @@ public class Dispositivo {
 		selectDispositivo.setPulgadasPantalla(scInt.nextInt());
 		selectDispositivo.setEnReparacion(false);
 		selectDispositivo.setAsignado(false);
-		System.out.println("Dispositivo " + selectDispositivo.marca + " " + selectDispositivo.modelo
-				+ " creado. ");
+		System.out.println("Dispositivo " + selectDispositivo.marca + " " + selectDispositivo.modelo + " creado. ");
 	}
 
 	public static void modificarDipsositivo(Dispositivo[] arrayDispositivo) {
@@ -214,5 +218,23 @@ public class Dispositivo {
 		} else {
 			System.out.println("Vale, no se han realizado cambios.");
 		}
+	}
+
+	
+
+	// metodo mostrar lista dispositivos
+
+	public static void ListarDispositivos(Dispositivo[] arrayDispositivos) {
+		int selectDispositivo;
+		for (int i = 0; i < arrayDispositivos.length; i++) {
+			if (arrayDispositivos[i].getEspacioLibre() == false) {
+				System.out.println(contDispositivo + ". " + arrayEmpleados[i+1].imprimeNombre());
+
+			}
+		}
+		System.out.println("Que dispositivo desea ver con mas detalle? Introduzca su numero");
+		selectDispositivo = scInt.nextInt() - 1;
+		System.out.println(arrayDispositivos[selectDispositivo]);
+
 	}
 }
